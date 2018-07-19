@@ -1,6 +1,6 @@
 ---
 
-- hosts: vpn
+- hosts: vpn.example.com
   vars:
     status : false
 
