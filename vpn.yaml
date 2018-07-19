@@ -1,0 +1,29 @@
+---
+
+- hosts: vpn
+  vars:
+    status : false
+
+  tasks:
+    - name: svcstate
+      set_fact:
+        status: "{{svcstate}}"
+      when: svcstate is defined
+
+    - debug:
+       var=status
+
+    - name: start 
+      command: '/usr/bin/systemctl start openvpn@server.service'
+      when: status == 'started'
+      become: true
+
+    - name: stop 
+      command: '/usr/bin/systemctl stop openvpn@server.service'
+      when: status == 'stopped'
+      become: true
+
+    - name: restart
+      command: '/usr/bin/systemctl restart openvpn@server.service'
+      when: status == 'restart'
+      become: true
