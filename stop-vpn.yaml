@@ -1,0 +1,10 @@
+---
+
+- hosts: localhost
+  connection: local 
+
+  tasks:
+    - name: stop vpn service 
+      service:
+        name: openvpn@server.service
+        state: stopped
